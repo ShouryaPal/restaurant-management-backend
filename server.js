@@ -25,7 +25,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://restaurant-management-tawny.vercel.app/",
+    origin: "https://restaurant-management-tawny.vercel.app",
     credentials: true,
   })
 );
