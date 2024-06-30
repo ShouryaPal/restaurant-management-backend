@@ -40,7 +40,14 @@ router.post("/login", async (req, res) => {
     );
 
     const { password: staffPassword, ...info } = staffMember._doc;
-    res.cookie("token", token).status(200).json(info);
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // true when in production
+        sameSite: "none",
+      })
+      .status(200)
+      .json(info);
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal Server Error" });

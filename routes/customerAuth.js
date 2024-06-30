@@ -38,7 +38,14 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = customer._doc;
-    res.cookie("token", token).status(200).json(info);
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // true when in production
+        sameSite: "none",
+      })
+      .status(200)
+      .json(info);
   } catch (err) {
     res.status(500).json(err);
   }
