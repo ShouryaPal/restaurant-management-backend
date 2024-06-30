@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const customerAuthRoute = require("./routes/customerAuth");
 const staffAuthRoute = require("./routes/staffAuth");
 const menu = require("./routes/menuItem");
-const order = require('./routes/order')
+const order = require("./routes/order");
 
 const connectDB = async () => {
   try {
@@ -25,15 +25,15 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://restaurant-management-tawny.vercel.app/",
     credentials: true,
   })
 );
 app.use(cookieParser());
 app.use("/api/customer/auth", customerAuthRoute);
-app.use("/api/staff/auth/",staffAuthRoute)
-app.use("/menu/",menu)
-app.use("/order/",order)
+app.use("/api/staff/auth/", staffAuthRoute);
+app.use("/menu/", menu);
+app.use("/order/", order);
 
 app.listen(process.env.PORT, () => {
   connectDB();
